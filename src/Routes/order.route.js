@@ -3,7 +3,7 @@ const router = express.Router();
 const withDatabase = require("../utils/withDatabase");
 const { validate } = require("../utils/validationHelper");
 const createOrder = require("../components/orders/createOrder");
-const getOrders = require("../components/orders/getOrders");
+const getOrders = require("../components/orders/getOrder");
 const listOrder = require("../components/orders/listOrder");
 const updateOrder = require("../components/orders/updateOrder");
 const deleteOrder = require("../components/orders/deleteOrder");
@@ -14,17 +14,11 @@ router
     validate(createOrder.validationSchema),
     withDatabase(createOrder.controller)
   )
-  .get(
-    validate(listOrder.validationSchema),
-    withDatabase(listOrder.controller)
-  );
+  .get(withDatabase(listOrder.controller));
 
 router
-  .route("/:user_id")
-  .get(
-    validate(getOrders.validationSchema),
-    withDatabase(getOrders.validationSchema)
-  )
+  .route("/:order_id")
+  .get(validate(getOrders.validationSchema), withDatabase(getOrders.controller))
   .patch(
     validate(updateOrder.validationSchema),
     withDatabase(updateOrder.controller)

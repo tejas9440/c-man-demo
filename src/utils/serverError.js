@@ -2,7 +2,6 @@ const { errorCodes } = require("../config/constant");
 
 class ServerError extends Error {
   constructor(code, message, details) {
-    console.log("--->>>" + code);
     if (!code) throw new Error("Error code is required in ServerError!!");
 
     super();

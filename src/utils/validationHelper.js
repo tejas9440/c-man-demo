@@ -19,7 +19,6 @@ const validate = (schema) => (req, res, next) => {
       key === "query"
         ? schema[key].validate(req.customQuery)
         : schema[key].validate(req[key]);
-
     if (error) {
       const details = { [key]: {} };
 

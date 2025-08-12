@@ -14,14 +14,11 @@ router
     validate(createUser.validationSchema),
     withDatabase(createUser.controller)
   )
-  .get(validate(listUser.validationSchema), withDatabase(listUser.controller));
+  .get(withDatabase(listUser.controller));
 
 router
   .route("/:user_id")
-  .get(
-    validate(getUser.validationSchema),
-    withDatabase(getUser.validationSchema)
-  )
+  .get(validate(getUser.validationSchema), withDatabase(getUser.controller))
   .patch(
     validate(updateuser.validationSchema),
     withDatabase(updateuser.controller)

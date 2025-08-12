@@ -5,5 +5,7 @@ exports.controller = async (req, res, next, db) => {
     `
   );
 
+  if (!users) res.json({ message: "No User Found!!" });
+
   res.status(200).json(users);
 };

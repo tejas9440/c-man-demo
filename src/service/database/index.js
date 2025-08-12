@@ -8,10 +8,10 @@ const dbConfig = {
   port: database.port,
   database: database.database,
   max: 80,
-
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl: false,
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
 
   connectionTimeoutMillis: 30000, // How long (in milliseconds) the client will wait when first trying to connect before giving up. 30 seconds
   idleTimeoutMillis: 900000, // How long a client in the connection pool can sit idle (unused) before being closed. (15 minutes X 60 seconds X 1000 milliseconds == 15 minutes)
@@ -53,15 +53,15 @@ const convertStringLiteralToQuery = (strings, ...values) => {
 const getConnection = async () => {
   const client = await pool.connect();
 
-  // const queryAll = async (sqlStmt, params) => {
-  //   const res = await client.query(sqlStmt, params);
-  //   return res.rows;
-  // };
+  const queryAll = async (sqlStmt, params) => {
+    const res = await client.query(sqlStmt, params);
+    return res.rows;
+  };
 
-  // const queryOne = async (sqlStmt, params) => {
-  //   const res = await queryAll(sqlStmt, params);
-  //   return res[0];
-  // };
+  const queryOne = async (sqlStmt, params) => {
+    const res = await queryAll(sqlStmt, params);
+    return res[0];
+  };
 
   const namedQueryAll = async (sqlStmt, params) => {
     const newQuery = convertNamedQueryToPositional(sqlStmt, params);
