@@ -5,8 +5,10 @@ const qs = require("qs");
 const Logger = require("./service/logger");
 const { port } = require("./config/var");
 const apiRoute = require("./Routes/app.route");
+const cookieParser = require("cookie-parser");
 
 const app = express();
+app.use(cookieParser());
 
 app.use(
   morgan(":method :url Status : :status, Time taken: :response-time ms", {

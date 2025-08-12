@@ -7,14 +7,16 @@ const getOrders = require("../components/orders/getOrder");
 const listOrder = require("../components/orders/listOrder");
 const updateOrder = require("../components/orders/updateOrder");
 const deleteOrder = require("../components/orders/deleteOrder");
+const validateToken = require("../middleware/auth/validateToken");
 
 router
   .route("/")
   .post(
+    validateToken,
     validate(createOrder.validationSchema),
     withDatabase(createOrder.controller)
   )
-  .get(withDatabase(listOrder.controller));
+  .get(validateToken, withDatabase(listOrder.controller));
 
 router
   .route("/:order_id")
