@@ -53,15 +53,15 @@ const convertStringLiteralToQuery = (strings, ...values) => {
 const getConnection = async () => {
   const client = await pool.connect();
 
-  const queryAll = async (sqlStmt, params) => {
-    const res = await client.query(sqlStmt, params);
-    return res.rows;
-  };
+  // const queryAll = async (sqlStmt, params) => {
+  //   const res = await client.query(sqlStmt, params);
+  //   return res.rows;
+  // };
 
-  const queryOne = async (sqlStmt, params) => {
-    const res = await queryAll(sqlStmt, params);
-    return res[0];
-  };
+  // const queryOne = async (sqlStmt, params) => {
+  //   const res = await queryAll(sqlStmt, params);
+  //   return res[0];
+  // };
 
   const namedQueryAll = async (sqlStmt, params) => {
     const newQuery = convertNamedQueryToPositional(sqlStmt, params);
@@ -74,16 +74,16 @@ const getConnection = async () => {
     return res[0];
   }
 
-  async function queryLiteralAll(strings, ...values) {
-    const newQuery = convertStringLiteralToQuery(strings, ...values);
-    const res = await queryAll(newQuery.sqlStmt, newQuery.params);
-    return res;
-  }
+  // async function queryLiteralAll(strings, ...values) {
+  //   const newQuery = convertStringLiteralToQuery(strings, ...values);
+  //   const res = await queryAll(newQuery.sqlStmt, newQuery.params);
+  //   return res;
+  // }
 
-  async function queryLiteralOne(strings, ...values) {
-    const res = await queryLiteralAll(strings, ...values);
-    return res[0];
-  }
+  // async function queryLiteralOne(strings, ...values) {
+  //   const res = await queryLiteralAll(strings, ...values);
+  //   return res[0];
+  // }
 
   const obj = {
     client,
@@ -91,10 +91,10 @@ const getConnection = async () => {
     release: () => client.release(),
     namedQueryAll,
     namedQueryOne,
-    queryAll,
-    queryOne,
-    queryLiteralAll,
-    queryLiteralOne,
+    // queryAll,
+    // queryOne,
+    // queryLiteralAll,
+    // queryLiteralOne,
   };
 
   return obj;
